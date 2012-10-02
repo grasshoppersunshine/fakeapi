@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<title>Welcome</title>
+	</head>
+	<body>
+		<?php if($customer->getErrorMessage()): ?>
+			<p><?php echo $customer->getErrorMessage() ?></p>
+			<p>Better error handling coming soon!</p>
+			<hr />
+			<a href="javascript:location.reload()">Refresh</a>
+		<?php else: ?>
+			<p>Welcome, <?php echo $customer->getName() ?>!</p>
+			<h2>Your Servers</h2>
+			<ol>
+				<?php foreach($customer->getServerIdList() as $id): ?>
+					<li><a href="/index.php/server/view?id=<?php echo $id ?>"><?php echo $id ?></a></li>
+				<?php endforeach ?>
+			</ol>
+		<?php endif ?>
+	</body>
+</html>

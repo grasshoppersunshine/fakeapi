@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<title>Welcome</title>
+	</head>
+	<body>
+		<?php if($server->getErrorMessage()): ?>
+			<p><?php echo $server->getErrorMessage() ?></p>
+			<p>Better error handling coming soon!</p>
+			<a href="javascript:location.reload()">Refresh</a>
+		<?php else: ?>
+			<h2>Server <?php echo $server->getId() ?></h2>
+			<dl>
+				<dt>IP</dt>
+				<dd><?php echo $server->getIp() ?></dd>
+				<dt>Hostname</dt>
+				<dd><?php echo $server->getHostname() ?></dd>
+				<dt>Diskspace</dt>
+				<dd><?php echo $server->getDiskspace().$server->getDiskspaceUnits() ?></dd>
+				<dt>Disk Used</dt>
+				<dd><?php echo $server->getDiskUsed().$server->getDiskspaceUnits() ?></dd>
+				<dt>State</dt>
+				<dd><?php echo $server->getState() ?></dd>
+			</dl>
+			<?php if($server->getState() == 'stopped'): ?>
+				<a href="/index.php/server/start?id=<?php echo $server->getId() ?>">START</a>
+			<?php elseif($server->getState() == 'running'): ?>
+				<a href="/index.php/server/stop?id=<?php echo $server->getId() ?>">STOP</a>
+			<?php else: ?>
+				<a href="javascript:location.reload()">Refresh</a>
+			<?php endif ?>
+		<?php endif ?>
+		<hr />
+		<a href="/index.php">Back to Index</a>
+	</body>
+</html>
